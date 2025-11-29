@@ -50,7 +50,7 @@ export function PluginInfoModal(props: {
       onClose={onClose}
       className="custom-modal !rounded-none flex items-center justify-center gap-4 cursor-default"
     >
-      <ModalHeader className="w-full p-2 border-gray-200 text-gray-500">
+      <ModalHeader className="w-full p-2 border-glass-border text-white/70">
         {header || (
           <div className="flex flex-row items-end justify-start gap-2">
             <img className="h-5" src={logo || DefaultPluginIcon} alt="logo" />
@@ -66,9 +66,9 @@ export function PluginInfoModal(props: {
               src={pluginContent.icon || DefaultPluginIcon}
               alt="Plugin Icon"
             />
-            <span className="text-3xl text-center">
+            <span className="text-3xl text-center text-white">
               <span>
-                <span className="text-blue-600 font-semibold">
+                <span className="text-primary-400 font-semibold">
                   {pluginContent.title}
                 </span>{' '}
                 wants access to your browser
@@ -81,11 +81,11 @@ export function PluginInfoModal(props: {
         <PluginPermissions pluginContent={pluginContent} />
       </div>
       <ModalFooter className="flex justify-end gap-2 p-4">
-        <button className="button" onClick={onClose}>
+        <button className="btn-glass" onClick={onClose}>
           Cancel
         </button>
         {onAddPlugin && (
-          <button className="button button--primary" onClick={onAddPlugin}>
+          <button className="btn-glass-primary" onClick={onAddPlugin}>
             Allow
           </button>
         )}

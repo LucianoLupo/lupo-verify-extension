@@ -90,7 +90,7 @@ export function PluginList({
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
           />
           <button
-            className="flex flex-row items-center justify-center gap-2 p-3 border-2 border-dashed border-slate-300 rounded-lg text-slate-500 hover:text-slate-700 hover:border-slate-400 transition-colors cursor-pointer w-full"
+            className="flex flex-row items-center justify-center gap-2 p-3 border-2 border-dashed border-glass-border rounded-glass-sm text-white/60 hover:text-white/80 hover:border-glass-highlight transition-colors cursor-pointer w-full"
             disabled={uploading}
           >
             {uploading ? (
@@ -108,7 +108,7 @@ export function PluginList({
         </div>
       )}
       {!hashes.length && !showAddButton && (
-        <div className="flex flex-col items-center justify-center text-slate-400 cursor-default select-none">
+        <div className="flex flex-col items-center justify-center text-white/50 cursor-default select-none">
           <div>No available plugins</div>
         </div>
       )}
@@ -208,8 +208,8 @@ export function Plugin({
   return (
     <div
       className={classNames(
-        'flex flex-row justify-center border rounded border-slate-300 p-2 gap-2 plugin-box',
-        'cursor-pointer hover:bg-slate-100 hover:border-slate-400 active:bg-slate-200',
+        'flex flex-row justify-center border rounded-glass-sm border-glass-border p-2 gap-2 plugin-box',
+        'cursor-pointer hover:bg-glass-light hover:border-glass-highlight active:bg-glass-medium',
         className,
       )}
       onClick={onRunPlugin}
@@ -219,24 +219,24 @@ export function Plugin({
         <div className="flex flex-row w-full gap-2">
           <img className="w-12 h-12" src={config.icon || DefaultPluginIcon} />
           <div className="flex flex-col w-full items-start">
-            <div className="font-bold flex flex-row h-6 items-center justify-between w-full">
+            <div className="font-bold flex flex-row h-6 items-center justify-between w-full text-white">
               {config.title}
               <div className="flex flex-row items-center justify-center">
                 <Icon
                   fa="fa-solid fa-circle-info"
-                  className="flex flex-row items-center justify-center cursor-pointer plugin-box__remove-icon"
+                  className="flex flex-row items-center justify-center cursor-pointer text-white/60 hover:text-white plugin-box__remove-icon"
                   onClick={onPluginInfo}
                 />
                 {!unremovable && (
                   <Icon
                     fa="fa-solid fa-xmark"
-                    className="flex flex-row items-center justify-center cursor-pointer text-red-500 bg-red-200 rounded-full plugin-box__remove-icon"
+                    className="flex flex-row items-center justify-center cursor-pointer text-accent-error bg-accent-error/20 rounded-full plugin-box__remove-icon"
                     onClick={onConfirmRemove}
                   />
                 )}
               </div>
             </div>
-            <div>{config.description}</div>
+            <div className="text-white/70">{config.description}</div>
           </div>
         </div>
       ) : (
@@ -254,7 +254,7 @@ export function Plugin({
           <PluginInfoModalHeader>
             <div className="flex flex-row items-end justify-start gap-2">
               <Icon
-                className="text-slate-500 hover:text-slate-700 cursor-pointer"
+                className="text-white/60 hover:text-white cursor-pointer"
                 size={1}
                 fa="fa-solid fa-caret-left"
                 onClick={() => showPluginInfo(false)}
@@ -267,10 +267,10 @@ export function Plugin({
               src={config.icon || DefaultPluginIcon}
               alt="Plugin Icon"
             />
-            <span className="text-3xl text-blue-600 font-semibold">
+            <span className="text-3xl text-primary-400 font-semibold">
               {config.title}
             </span>
-            <div className="text-slate-500 text-lg">{config.description}</div>
+            <div className="text-white/60 text-lg">{config.description}</div>
           </PluginInfoModalContent>
         </PluginInfoModal>
       )}
@@ -292,16 +292,16 @@ function RemovePlugin(props: {
 
   return (
     <div className="flex flex-col items-center w-full gap-1">
-      <div className="font-bold text-red-700">
+      <div className="font-bold text-accent-error">
         {`Are you sure you want to remove "${config.title}" plugin?`}
       </div>
-      <div className="mb-1">Warning: this cannot be undone.</div>
+      <div className="mb-1 text-white/70">Warning: this cannot be undone.</div>
       <div className="flex flex-row w-full gap-1">
-        <button className="flex-grow button p-1" onClick={onCancel}>
+        <button className="flex-grow btn-glass p-1" onClick={onCancel}>
           Cancel
         </button>
         <button
-          className="flex-grow font-bold bg-red-500 hover:bg-red-600 text-white rounded p-1"
+          className="flex-grow font-bold bg-accent-error hover:bg-accent-error/80 text-white rounded-glass-sm p-1"
           onClick={onRemove}
         >
           Remove

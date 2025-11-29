@@ -140,13 +140,13 @@ export default function Options(): ReactElement {
           </ModalContent>
           <div className="flex flex-row justify-end items-center gap-2 w-full">
             <button
-              className="button"
+              className="btn-glass"
               onClick={() => setShowReloadModal(false)}
             >
               No
             </button>
             <button
-              className="button button--primary"
+              className="btn-glass-primary"
               onClick={onSaveAndReload}
             >
               Yes
@@ -155,7 +155,7 @@ export default function Options(): ReactElement {
         </Modal>
       )}
       <div className="flex flex-row flex-nowrap justify-between items-between py-1 px-2 gap-2">
-        <p className="font-bold text-base">Settings</p>
+        <p className="font-bold text-base text-white">Settings</p>
       </div>
       <NormalOptions
         notary={notary}
@@ -167,7 +167,7 @@ export default function Options(): ReactElement {
         setDeveloperMode={setDeveloperMode}
       />
       <div className="justify-left px-2 pt-3 gap-2">
-        <button className="font-bold" onClick={onAdvanced}>
+        <button className="font-bold text-white" onClick={onAdvanced}>
           <i
             className={
               advanced
@@ -196,7 +196,7 @@ export default function Options(): ReactElement {
       )}
       <div className="flex flex-row flex-nowrap justify-end gap-2 p-2">
         <button
-          className="button !bg-primary/[0.9] hover:bg-primary/[0.8] active:bg-primary !text-white"
+          className="btn-glass-primary"
           disabled={!dirty}
           onClick={onSave}
         >
@@ -205,7 +205,7 @@ export default function Options(): ReactElement {
       </div>
       <div className="flex flex-col w-full items-end gap-2 p-2">
         <button
-          className="button"
+          className="btn-glass"
           onClick={() =>
             openInTab(
               'https://github.com/lucianolupo/lupo-verify-extension/issues/new',
@@ -214,7 +214,7 @@ export default function Options(): ReactElement {
         >
           File an issue
         </button>
-        <button className="button" onClick={onCleanCache}>
+        <button className="btn-glass" onClick={onCleanCache}>
           <span>Clean Cache (</span>
           {isCalculatingDbSize ? (
             <i className="fa-solid fa-spinner fa-spin"></i>
@@ -240,10 +240,10 @@ function InputField(props: {
 
   return (
     <div className="flex flex-col flex-nowrap py-1 px-2 gap-2">
-      <div className="font-semibold cursor-default">{label}</div>
+      <div className="font-semibold cursor-default text-white/90">{label}</div>
       <input
         type={type}
-        className="input border"
+        className="input-glass"
         onChange={onChange}
         value={value}
         min={min}
@@ -275,8 +275,8 @@ function NormalOptions(props: {
   return (
     <div>
       <div className="flex flex-col flex-nowrap py-1 px-2 gap-2 cursor-default">
-        <div className="font-semibold">Version</div>
-        <div className="input border bg-slate-100">{version}</div>
+        <div className="font-semibold text-white/90">Version</div>
+        <div className="input-glass opacity-70">{version}</div>
       </div>
       <InputField
         label="Notary API"
@@ -299,11 +299,11 @@ function NormalOptions(props: {
         }}
       />
       <div className="flex flex-col flex-nowrap py-1 px-2 gap-2 cursor-default">
-        <div className="font-semibold">Explorer URL</div>
-        <div className="input border bg-slate-100">{EXPLORER_API}</div>
+        <div className="font-semibold text-white/90">Explorer URL</div>
+        <div className="input-glass opacity-70">{EXPLORER_API}</div>
       </div>
       <div className="flex flex-row items-center py-3 px-2 gap-2">
-        <div className="font-semibold">Developer Mode</div>
+        <div className="font-semibold text-white/90">Developer Mode</div>
         <div className="relative inline-block w-9 h-5">
           <input
             type="checkbox"
@@ -318,7 +318,7 @@ function NormalOptions(props: {
           <label
             htmlFor="developer-mode"
             className={`block h-5 rounded-full cursor-pointer transition-all duration-300 ease-in-out ${
-              developerMode ? 'bg-blue-500' : 'bg-gray-300'
+              developerMode ? 'bg-primary-500' : 'bg-glass-heavy'
             }`}
           >
             <span
@@ -381,9 +381,9 @@ function AdvancedOptions(props: {
         }}
       />
       <div className="flex flex-col flex-nowrap py-1 px-2 gap-2">
-        <div className="font-semibold">Logging Level</div>
+        <div className="font-semibold text-white/90">Logging Level</div>
         <select
-          className="select !bg-white border !px-2 !py-1"
+          className="input-glass"
           onChange={(e) => {
             setLoggingLevel(e.target.value as LoggingLevel);
             setDirty(true);

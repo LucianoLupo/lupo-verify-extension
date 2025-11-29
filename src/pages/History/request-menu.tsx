@@ -78,13 +78,13 @@ export default function RequestMenu({
           showMenu(false);
         }}
       />
-      <div className="absolute top-[100%] right-0 rounded-md z-20">
-        <div className="flex flex-col bg-slate-200 w-40 shadow rounded-md py">
+      <div className="absolute top-[100%] right-0 rounded-glass-sm z-20">
+        <div className="flex flex-col bg-dark-elevated w-40 shadow-glass rounded-glass-sm py border border-glass-border">
           {status === 'success' && (
             <>
               <RequestMenuRow
                 fa="fa-solid fa-download"
-                className="border-b border-slate-300"
+                className="border-b border-glass-border"
                 onClick={(e) => {
                   e.stopPropagation();
                   showMenu(false);
@@ -95,7 +95,7 @@ export default function RequestMenu({
               </RequestMenuRow>
               <RequestMenuRow
                 fa="fa-solid fa-upload"
-                className="border-b border-slate-300"
+                className="border-b border-glass-border"
                 onClick={(e) => {
                   e.stopPropagation();
                   setShowingShareConfirmation(true);
@@ -108,7 +108,7 @@ export default function RequestMenu({
           {status === 'error' && (
             <RequestMenuRow
               fa="fa-solid fa-arrows-rotate"
-              className="border-b border-slate-300"
+              className="border-b border-glass-border"
               onClick={(e) => {
                 e.stopPropagation();
                 onRetry();
@@ -120,7 +120,7 @@ export default function RequestMenu({
           )}
           <RequestMenuRow
             fa="fa-solid fa-trash"
-            className="border-b border-slate-300 !text-red-500"
+            className="border-b border-glass-border !text-accent-error"
             onClick={(e) => {
               e.stopPropagation();
               setShowRemoveModal(true);
@@ -143,7 +143,7 @@ function RequestMenuRow(props: {
   return (
     <div
       className={classNames(
-        'flex flex-row items-center py-3 px-4 gap-2 hover:bg-slate-300 cursor-pointer text-slate-800 hover:text-slate-900 font-semibold',
+        'flex flex-row items-center py-3 px-4 gap-2 hover:bg-glass-light cursor-pointer text-white/80 hover:text-white font-semibold',
         props.className,
       )}
       onClick={props.onClick}
@@ -201,13 +201,13 @@ function ShareConfirmationModal({
     >
       <ModalContent className="flex flex-col w-full gap-4 items-center text-base justify-center">
         {!request.cid ? (
-          <p className="text-slate-500 text-center">
+          <p className="text-white/60 text-center">
             {uploadError ||
               'This will make your proof publicly accessible by anyone with the CID'}
           </p>
         ) : (
           <input
-            className="input w-full bg-slate-100 border border-slate-200"
+            className="input-glass w-full"
             readOnly
             value={`${EXPLORER_API}/ipfs/${request.cid}`}
             onFocus={(e) => e.target.select()}
@@ -220,7 +220,7 @@ function ShareConfirmationModal({
             {!uploadError && (
               <button
                 onClick={handleUpload}
-                className="button button--primary flex flex-row items-center justify-center gap-2 m-0"
+                className="btn-glass-primary flex flex-row items-center justify-center gap-2 m-0"
                 disabled={uploading}
               >
                 {uploading && (
@@ -234,7 +234,7 @@ function ShareConfirmationModal({
               </button>
             )}
             <button
-              className="m-0 w-24 bg-slate-100 text-slate-400 hover:bg-slate-200 hover:text-slate-600 font-bold"
+              className="btn-glass m-0 w-24"
               onClick={onClose}
             >
               Close
@@ -244,12 +244,12 @@ function ShareConfirmationModal({
           <>
             <button
               onClick={() => copy(`${EXPLORER_API}/ipfs/${request.cid}`)}
-              className="m-0 w-24 bg-slate-600 text-slate-200 hover:bg-slate-500 hover:text-slate-100 font-bold"
+              className="btn-glass-primary m-0 w-24"
             >
               Copy
             </button>
             <button
-              className="m-0 w-24 bg-slate-100 text-slate-400 hover:bg-slate-200 hover:text-slate-600 font-bold"
+              className="btn-glass m-0 w-24"
               onClick={onClose}
             >
               Close
@@ -280,22 +280,22 @@ export function RemoveHistory(props: {
       className="flex flex-col items-center text-base cursor-default justify-center !w-auto mx-4 my-[50%] p-4 gap-4"
     >
       <ModalContent className="flex flex-col w-full gap-4 items-center text-base justify-center">
-        <div className="text-base">
+        <div className="text-base text-white">
           Are you sure you want to delete this attestation?
         </div>
-        <div className="mb-1">
-          <span className="text-red-500 font-bold">Warning:</span> this cannot
+        <div className="mb-1 text-white/70">
+          <span className="text-accent-error font-bold">Warning:</span> this cannot
           be undone.
         </div>
         <div className="flex flex-row gap-2 justify-end">
           <button
-            className="m-0 w-24 bg-slate-100 text-slate-300 hover:bg-slate-200 hover:text-slate-500"
+            className="btn-glass m-0 w-24"
             onClick={onCancel}
           >
             Cancel
           </button>
           <button
-            className="m-0 w-24 bg-red-100 text-red-300 hover:bg-red-200 hover:text-red-500"
+            className="btn-glass m-0 w-24 border-accent-error text-accent-error hover:bg-accent-error/20"
             onClick={onRemove}
           >
             Delete

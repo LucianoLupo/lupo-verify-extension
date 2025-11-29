@@ -273,9 +273,15 @@ export const initRPC = () => {
         case BackgroundActiontype.open_popup:
           return handleOpenPopup(request);
         case BackgroundActiontype.notarize_request:
-          return handleNotarizeRequest(request);
+          handleNotarizeRequest(request)
+            .then(sendResponse)
+            .catch((e) => (sendResponse as any)({ error: e.message }));
+          return true; // Keep message port open for async response
         case BackgroundActiontype.run_plugin_by_url_request:
-          return handleRunPluginByURLRequest(request);
+          handleRunPluginByURLRequest(request)
+            .then(sendResponse)
+            .catch((e) => (sendResponse as any)({ error: e.message }));
+          return true; // Keep message port open for async response
         case BackgroundActiontype.get_logging_level:
           getLoggingFilter().then(sendResponse);
           return true;

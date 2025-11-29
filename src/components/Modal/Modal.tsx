@@ -19,14 +19,14 @@ export default function Modal(props: Props): ReactElement {
 
   return ReactDOM.createPortal(
     <div
-      className={classNames('bg-black bg-opacity-80', 'modal__overlay')}
+      className={classNames('glass-overlay', 'modal__overlay')}
       onClick={(e) => {
         e.stopPropagation();
         onClose && onClose(e);
       }}
     >
       <div
-        className={classNames(`modal__wrapper bg-white`, className)}
+        className={classNames(`modal__wrapper glass-card`, className)}
         onClick={(e) => e.stopPropagation()}
       >
         {children}
@@ -46,18 +46,18 @@ export function ModalHeader(props: HeaderProps): ReactElement {
   return (
     <div
       className={classNames(
-        'border-b modal__header border-gray-100',
+        'border-b modal__header border-glass-border',
         props.className,
       )}
     >
-      <div className="modal__header__title">{props.children}</div>
+      <div className="modal__header__title text-white">{props.children}</div>
       <div className="modal__header__content">
         {props.onClose && (
           <div
             className={classNames(
               'flex flex-row items-center justify-center',
               'p-2 rounded-full opacity-50',
-              'hover:opacity-100 text-black',
+              'hover:opacity-100 text-white cursor-pointer',
             )}
           >
             <Icon fa="fas fa-times" size={1} onClick={props.onClose} />
@@ -75,7 +75,7 @@ type ContentProps = {
 
 export function ModalContent(props: ContentProps): ReactElement {
   return (
-    <div className={classNames('modal__content', props.className)}>
+    <div className={classNames('modal__content text-white/90', props.className)}>
       {props.children}
     </div>
   );
@@ -90,7 +90,7 @@ export function ModalFooter(props: FooterProps): ReactElement {
   return (
     <div
       className={classNames(
-        'border-t modal__footer border-gray-100 w-full',
+        'border-t modal__footer border-glass-border w-full',
         props.className,
       )}
     >

@@ -9,7 +9,12 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import "../../../node_modules/@fortawesome/fontawesome-free/scss/solid";
 @import "../../../node_modules/@fortawesome/fontawesome-free/scss/regular";
 
+// ========================================
+// DARK MODE GLASSMORPHISM THEME
+// ========================================
+
 body {
+  @apply bg-dark-bg text-white;
   width: 480px;
   height: 600px;
   margin: 0;
@@ -24,101 +29,272 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+  @apply bg-glass-light text-accent-info px-1 py-0.5 rounded;
 }
 
 #app-container {
+  @apply bg-dark-bg;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  background-image:
+    radial-gradient(at 20% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
+}
 
-  @media (min-width: 1024px) {
-    @apply bg-slate-400;
+// ========================================
+// GLASS COMPONENT CLASSES
+// ========================================
+
+@layer components {
+  // Glass Card
+  .glass-card {
+    @apply bg-glass-light backdrop-blur-glass;
+    @apply border border-glass-border rounded-glass;
+    @apply shadow-glass;
+  }
+
+  .glass-card-sm {
+    @apply bg-glass-light backdrop-blur-glass;
+    @apply border border-glass-border rounded-glass-sm;
+    @apply shadow-glass-sm;
+  }
+
+  // Glass Header
+  .glass-header {
+    @apply bg-dark-surface/80 backdrop-blur-heavy;
+    @apply border-b border-glass-border;
+    @apply shadow-inner-glow;
+  }
+
+  // Glass Buttons
+  .btn-glass {
+    @apply px-4 py-2 rounded-glass-sm;
+    @apply bg-glass-medium backdrop-blur-xs;
+    @apply border border-glass-border;
+    @apply text-white/90 font-medium;
+    @apply transition-all duration-200 ease-out;
+    @apply cursor-pointer select-none;
+
+    &:hover:not(:disabled) {
+      @apply bg-glass-heavy border-glass-highlight;
+      @apply shadow-glass-sm;
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+
+    &:disabled {
+      @apply opacity-40 cursor-not-allowed;
+    }
+  }
+
+  .btn-glass-primary {
+    @apply btn-glass;
+    @apply bg-accent-info/60 border-accent-info/40;
+
+    &:hover:not(:disabled) {
+      @apply bg-accent-info/80 border-accent-info/60;
+      @apply shadow-glow-primary;
+    }
+  }
+
+  .btn-glass-success {
+    @apply btn-glass;
+    @apply bg-accent-success/20 border-accent-success/30 text-accent-success;
+
+    &:hover:not(:disabled) {
+      @apply bg-accent-success/30 border-accent-success/50;
+      @apply shadow-glow-success;
+    }
+  }
+
+  .btn-glass-danger {
+    @apply btn-glass;
+    @apply bg-accent-error/20 border-accent-error/30 text-accent-error;
+
+    &:hover:not(:disabled) {
+      @apply bg-accent-error/30 border-accent-error/50;
+      @apply shadow-glow-error;
+    }
+  }
+
+  .btn-glass-ghost {
+    @apply btn-glass;
+    @apply bg-transparent border-transparent;
+
+    &:hover:not(:disabled) {
+      @apply bg-glass-light border-glass-border;
+    }
+  }
+
+  // Glass Inputs
+  .input-glass {
+    @apply w-full px-3 py-2 rounded-glass-sm;
+    @apply bg-glass-light backdrop-blur-xs;
+    @apply border border-glass-border;
+    @apply text-white text-sm placeholder:text-white/40;
+    @apply outline-none;
+    @apply transition-all duration-200;
+
+    &:focus {
+      @apply border-accent-info/50 bg-glass-medium;
+      @apply ring-1 ring-accent-info/30;
+    }
+  }
+
+  .textarea-glass {
+    @apply input-glass resize-y min-h-[80px];
+  }
+
+  .select-glass {
+    @apply input-glass cursor-pointer appearance-none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(255,255,255,0.5)'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+  }
+
+  // Glass Tabs
+  .tab-glass {
+    @apply px-4 py-2;
+    @apply text-white/60 font-medium;
+    @apply transition-all duration-200;
+    @apply border-b-2 border-transparent;
+    @apply cursor-pointer;
+
+    &:hover {
+      @apply text-white/80 bg-glass-light;
+    }
+  }
+
+  .tab-glass-active {
+    @apply tab-glass;
+    @apply text-white bg-glass-medium;
+    @apply border-b-2 border-accent-info;
+  }
+
+  // Glass Badges
+  .badge-glass {
+    @apply px-2 py-0.5 rounded-full text-xs font-medium;
+    @apply bg-glass-medium backdrop-blur-xs;
+    @apply border border-glass-border;
+  }
+
+  .badge-success {
+    @apply badge-glass;
+    @apply bg-accent-success/20 text-accent-success border-accent-success/30;
+  }
+
+  .badge-error {
+    @apply badge-glass;
+    @apply bg-accent-error/20 text-accent-error border-accent-error/30;
+  }
+
+  .badge-warning {
+    @apply badge-glass;
+    @apply bg-accent-warning/20 text-accent-warning border-accent-warning/30;
+  }
+
+  .badge-info {
+    @apply badge-glass;
+    @apply bg-accent-info/20 text-accent-info border-accent-info/30;
+  }
+
+  // Glass Modal
+  .glass-overlay {
+    @apply fixed inset-0 z-50;
+    @apply bg-black/60 backdrop-blur-xs;
+  }
+
+  .glass-modal {
+    @apply glass-card;
+    @apply shadow-glass-lg;
+    @apply max-w-md w-full;
+  }
+
+  // Glass Divider
+  .glass-divider {
+    @apply h-px bg-glass-border my-4;
   }
 }
 
+// ========================================
+// LEGACY CLASS SUPPORT (for gradual migration)
+// ========================================
+
 .button {
-  @apply bg-slate-200;
-  @apply text-slate-400;
-  @apply font-bold;
-  @apply px-2 py-0.5;
-  user-select: none;
-
-  &:hover {
-    @apply text-slate-600;
-  }
-
-  &:active {
-    @apply text-slate-700;
-  }
+  @apply btn-glass;
 
   &--primary {
-    @apply bg-primary/[0.8];
-    @apply text-white;
+    @apply bg-accent-info/60 border-accent-info/40;
 
-    &:hover {
-      @apply bg-primary/[0.9];
-      @apply text-white;
-    }
-
-    &:active {
-      @apply bg-primary;
-      @apply text-white;
+    &:hover:not(:disabled) {
+      @apply bg-accent-info/80 border-accent-info/60 shadow-glow-primary;
     }
   }
 
   &:disabled {
-    @apply opacity-50;
-    @apply select-none;
-
-    &:hover {
-      @apply text-slate-400;
-    }
-
-    &:active {
-      @apply text-slate-400;
-    }
+    @apply opacity-40 cursor-not-allowed;
   }
 }
 
 .input {
-  @apply outline-none;
-  @apply text-xs;
-  @apply px-2 py-1;
-
-  &:focus {
-    @apply border-slate-300;
-  }
-}
-
-a {
-  @apply text-blue-600 underline;
-
-  &:hover {
-    @apply text-blue-500;
-  }
-
-  &:visited {
-    @apply text-purple-600;
-  }
+  @apply input-glass;
 }
 
 .select {
-  @apply bg-slate-200;
-  @apply text-slate-800;
-  @apply font-bold;
-  @apply cursor-pointer;
-  @apply px-2 py-0.5;
-  outline: none;
-  border-right: .5rem solid transparent
+  @apply select-glass;
 }
 
 .textarea {
-  @apply outline-none;
-  @apply text-xs;
-  @apply px-2 py-1;
-  @apply border;
+  @apply textarea-glass;
+}
 
-  &:focus {
-    @apply border-slate-300;
+// ========================================
+// LINK STYLES
+// ========================================
+
+a {
+  @apply text-accent-info no-underline;
+  @apply transition-colors duration-200;
+
+  &:hover {
+    @apply text-accent-info/80 underline;
   }
+}
+
+// ========================================
+// SCROLLBAR STYLES
+// ========================================
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-glass-medium rounded-full;
+
+  &:hover {
+    @apply bg-glass-heavy;
+  }
+}
+
+// ========================================
+// UTILITY CLASSES
+// ========================================
+
+.text-muted {
+  @apply text-white/60;
+}
+
+.text-accent {
+  @apply text-accent-info;
 }

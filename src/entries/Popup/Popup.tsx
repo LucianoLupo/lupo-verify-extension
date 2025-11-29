@@ -74,10 +74,10 @@ const Popup = () => {
   }, []);
 
   return (
-    <div className="flex flex-col w-full h-full overflow-hidden lg:w-[600px] lg:h-[800px] lg:border lg:m-auto lg:mt-40 lg:bg-white lg:shadow">
-      <div className="flex flex-nowrap flex-shrink-0 flex-row items-center relative gap-2 h-9 p-2 cursor-default justify-center bg-slate-300 w-full">
+    <div className="flex flex-col w-full h-full overflow-hidden lg:w-[600px] lg:h-[800px] lg:border lg:border-glass-border lg:m-auto lg:mt-40 lg:shadow-glass">
+      <div className="glass-header flex flex-nowrap flex-shrink-0 flex-row items-center relative gap-2 h-10 px-3 py-2 cursor-default justify-center w-full">
         <img
-          className="absolute left-2 h-5 cursor-pointer"
+          className="absolute left-3 h-5 cursor-pointer"
           src={logo}
           alt="logo"
           onClick={() => navigate('/')}

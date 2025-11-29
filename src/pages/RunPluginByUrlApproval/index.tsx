@@ -103,41 +103,41 @@ export function RunPluginByUrlApproval(): ReactElement {
         {!!favIconUrl ? (
           <img
             src={favIconUrl}
-            className="h-16 w-16 rounded-full border border-slate-200 bg-slate-200"
+            className="h-16 w-16 rounded-full border border-glass-border bg-glass-medium"
             alt="logo"
           />
         ) : (
           <Icon
             fa="fa-solid fa-globe"
             size={4}
-            className="h-16 w-16 rounded-full border border-slate-200 text-blue-500"
+            className="h-16 w-16 rounded-full border border-glass-border text-primary-400"
           />
         )}
-        <div className="text-2xl text-center px-8">
-          <b className="text-blue-500">{hostname}</b> wants to execute a plugin:
+        <div className="text-2xl text-center px-8 text-white">
+          <b className="text-primary-400">{hostname}</b>
         </div>
       </div>
       {!pluginContent && (
-        <div className="flex flex-col items-center flex-grow gap-4 border border-slate-300 p-8 mx-8 rounded bg-slate-100">
+        <div className="flex flex-col items-center flex-grow gap-4 border border-glass-border p-8 mx-8 rounded-glass-sm bg-glass-light">
           <Icon
-            className="animate-spin w-fit text-slate-500"
+            className="animate-spin w-fit text-white/60"
             fa="fa-solid fa-spinner"
             size={1}
           />
         </div>
       )}
       {pluginContent && (
-        <div className="flex flex-col gap-4 border border-slate-300 p-4 mx-8 rounded bg-slate-100">
+        <div className="flex flex-col gap-4 border border-glass-border p-4 mx-8 rounded-glass-sm bg-glass-light">
           <div className="flex flex-col items-center">
             <img
               className="w-12 h-12 mb-2"
               src={pluginContent.icon}
               alt="Plugin Icon"
             />
-            <span className="text-2xl text-blue-600 font-semibold">
+            <span className="text-2xl text-primary-400 font-semibold">
               {pluginContent.title}
             </span>
-            <div className="text-slate-500 text-base">
+            <div className="text-white/60 text-base">
               {pluginContent.description}
             </div>
           </div>

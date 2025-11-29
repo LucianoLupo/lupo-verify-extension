@@ -66,7 +66,7 @@ export default function Home(props: {
         className={classNames(
           'flex flex-row justify-center items-center z-10',
           {
-            'fixed top-9 w-full bg-white shadow lg:w-[598px] lg:mt-40':
+            'fixed top-9 w-full bg-dark-surface/95 backdrop-blur-glass shadow-glass-sm lg:w-[598px] lg:mt-40':
               shouldFix,
           },
         )}
@@ -120,10 +120,9 @@ function TabSelector(props: {
     <button
       onClick={props.onClick}
       className={classNames(
-        'flex flex-grow items-center justify-center p-2 font-semibold hover:text-slate-700 border-b-2 ',
+        'tab-glass',
         {
-          'font-semibold text-slate-400 border-white': !props.selected,
-          'font-bold text-primary border-primary': props.selected,
+          'tab-glass-active': props.selected,
         },
         props.className,
       )}

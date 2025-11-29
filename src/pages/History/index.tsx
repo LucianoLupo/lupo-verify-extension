@@ -66,9 +66,9 @@ export function OneRequestHistory(props: {
   return (
     <div
       className={classNames(
-        'flex flex-row items-center flex-nowrap border rounded-md px-2.5 py-3 gap-0.5 hover:bg-slate-50 cursor-pointer relative',
+        'flex flex-row items-center flex-nowrap border border-glass-border rounded-glass-sm px-2.5 py-3 gap-0.5 hover:bg-glass-light cursor-pointer relative',
         {
-          '!cursor-default !bg-slate-200': status === 'pending',
+          '!cursor-default !bg-glass-medium': status === 'pending',
         },
         props.className,
       )}
@@ -78,29 +78,29 @@ export function OneRequestHistory(props: {
       }}
     >
       <ErrorModal />
-      <div className="w-12 h-12 rounded-full flex flex-row items-center justify-center bg-slate-300">
+      <div className="w-12 h-12 rounded-full flex flex-row items-center justify-center bg-glass-medium">
         <img
           className="relative w-7 h-7 top-[-1px] opacity-60"
           src={NotarizeIcon}
         />
       </div>
       <div className="flex flex-col flex-nowrap flex-grow flex-shrink w-0 gap-1">
-        <div className="flex flex-row text-black text-sm font-semibold px-2 rounded-md overflow-hidden text-ellipsis gap-1">
+        <div className="flex flex-row text-white text-sm font-semibold px-2 rounded-md overflow-hidden text-ellipsis gap-1">
           <span>Notarize request</span>
-          <span className="font-normal border-b border-dashed border-slate-400 text-slate-500">
+          <span className="font-normal border-b border-dashed border-glass-border text-white/60">
             {requestUrl?.hostname}
           </span>
         </div>
         <div
           className={classNames('font-semibold px-2 rounded-sm w-fit', {
-            'text-green-600': status === 'success',
-            'text-red-600': status === 'error',
+            'text-accent-success': status === 'success',
+            'text-accent-error': status === 'error',
           })}
         >
           {status === 'success' && 'Success'}
           {status === 'error' && 'Error'}
           {status === 'pending' && (
-            <div className="text-center flex flex-row flex-grow-0 gap-2 self-end items-center justify-center text-slate-600">
+            <div className="text-center flex flex-row flex-grow-0 gap-2 self-end items-center justify-center text-white/70">
               <Icon
                 className="animate-spin"
                 fa="fa-solid fa-spinner"
@@ -124,7 +124,7 @@ export function OneRequestHistory(props: {
         <div className="h-4">
           {!hideActions.length && (
             <Icon
-              className="text-slate-500 hover:text-slate-600 relative"
+              className="text-white/50 hover:text-white/80 relative"
               fa="fa-solid fa-ellipsis"
               onClick={(e) => {
                 e.stopPropagation();
@@ -137,7 +137,7 @@ export function OneRequestHistory(props: {
             </Icon>
           )}
         </div>
-        <div className="text-slate-500" title={day.format('LLLL')}>
+        <div className="text-white/50 text-xs" title={day.format('LLLL')}>
           {day.fromNow()}
         </div>
       </div>
@@ -150,14 +150,14 @@ export function OneRequestHistory(props: {
       <></>
     ) : (
       <Modal
-        className="flex flex-col gap-4 items-center text-base cursor-default justify-center !w-auto mx-4 my-[50%] min-h-24 p-4 border border-red-500"
+        className="flex flex-col gap-4 items-center text-base cursor-default justify-center !w-auto mx-4 my-[50%] min-h-24 p-4 border border-accent-error"
         onClose={closeAllModal}
       >
-        <ModalContent className="flex justify-center items-center text-slate-500">
+        <ModalContent className="flex justify-center items-center text-white/70">
           {msg || request?.errorMessage}
         </ModalContent>
         <button
-          className="m-0 w-24 bg-red-100 text-red-300 hover:bg-red-200 hover:text-red-500"
+          className="btn-glass m-0 w-24 border-accent-error text-accent-error hover:bg-accent-error/20"
           onClick={closeAllModal}
         >
           OK

@@ -70,6 +70,11 @@ import { urlify } from '../../utils/misc';
         },
       });
 
+      // Check if response contains an error
+      if (proof && typeof proof === 'object' && 'error' in proof) {
+        throw new Error(proof.error);
+      }
+
       return proof;
     },
   );
@@ -94,6 +99,11 @@ import { urlify } from '../../utils/misc';
           params,
         },
       });
+
+      // Check if response contains an error
+      if (response && typeof response === 'object' && 'error' in response) {
+        throw new Error(response.error);
+      }
 
       return response;
     },

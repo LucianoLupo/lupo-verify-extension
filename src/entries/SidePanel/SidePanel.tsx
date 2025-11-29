@@ -90,11 +90,11 @@ export default function SidePanel(): ReactElement {
   }, []);
 
   return (
-    <div className="flex flex-col bg-slate-100 w-screen h-screen">
-      <div className="relative flex flex-nowrap flex-shrink-0 flex-row items-center gap-2 h-9 p-2 cursor-default justify-center bg-slate-300 w-full">
+    <div className="flex flex-col w-screen h-screen">
+      <div className="glass-header relative flex flex-nowrap flex-shrink-0 flex-row items-center gap-2 h-10 px-3 py-2 cursor-default justify-center w-full">
         <img className="h-5" src={logo} alt="logo" />
         <button
-          className="button absolute right-2"
+          className="btn-glass absolute right-3 px-3 py-1 text-sm"
           onClick={() => window.close()}
         >
           Close
@@ -187,7 +187,7 @@ function PluginBody({
           <div className="font-bold flex flex-row h-6 items-center justify-between w-full text-base">
             {title}
           </div>
-          <div className="text-slate-500 text-sm">{description}</div>
+          <div className="text-white/60 text-sm">{description}</div>
         </div>
       </div>
       <div className="flex flex-col items-start gap-8 mt-8">
@@ -390,11 +390,10 @@ function StepContent(
     btnContent = (
       <button
         className={classNames(
-          'button mt-2 w-fit flex flex-row flex-nowrap items-center gap-2',
-          '!bg-green-200 !text-black cursor-default border border-green-500 rounded',
+          'btn-glass-success mt-2 w-fit flex flex-row flex-nowrap items-center gap-2 cursor-default',
         )}
       >
-        <Icon className="text-green-600" fa="fa-solid fa-check" />
+        <Icon className="text-accent-success" fa="fa-solid fa-check" />
         <span className="text-sm">DONE</span>
       </button>
     );
@@ -414,7 +413,7 @@ function StepContent(
       <div className="flex flex-col gap-2">
         {notaryRequest?.progress === RequestProgress.Error && (
           <div className="flex flex-col gap-1">
-            <div className="flex flex-row items-start gap-2 text-red-600">
+            <div className="flex flex-row items-start gap-2 text-accent-error">
               <Icon
                 fa="fa-solid fa-triangle-exclamation"
                 size={1}
@@ -455,27 +454,27 @@ function StepContent(
 
   return (
     <div className="flex flex-row gap-4 text-base w-full">
-      <div className="text-slate-500 self-start">{index + 1}.</div>
+      <div className="text-white/60 self-start">{index + 1}.</div>
       <div className="flex flex-col flex-grow flex-shrink w-0">
         <div
           className={classNames('font-semibold', {
-            'line-through text-slate-500': completed,
+            'line-through text-white/60': completed,
           })}
         >
           {title}
         </div>
         {!!description && (
-          <div className="text-slate-500 text-sm">{description}</div>
+          <div className="text-white/60 text-sm">{description}</div>
         )}
         {!!error && (
           <div className="flex flex-col gap-1">
-            <div className="flex flex-row items-start gap-2 text-red-600">
+            <div className="flex flex-row items-start gap-2 text-accent-error">
               <Icon
                 fa="fa-solid fa-triangle-exclamation"
                 size={1}
                 className="mt-0.5"
               />
-              <div className="text-red-500 text-sm">{error}</div>
+              <div className="text-accent-error text-sm">{error}</div>
             </div>
           </div>
         )}
@@ -514,8 +513,7 @@ function InputField({
 }: InputFieldProps): ReactElement {
   const { name, label, type, placeholder, required, options } = config;
 
-  const baseClasses =
-    'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent';
+  const baseClasses = 'input-glass';
 
   const renderInput = () => {
     switch (type) {
@@ -573,9 +571,9 @@ function InputField({
 
   return (
     <div className="flex flex-col gap-1">
-      <label htmlFor={name} className="text-sm font-medium text-gray-700">
+      <label htmlFor={name} className="text-sm font-medium text-white/80">
         {label}
-        {required && <span className="text-red-500 ml-1">*</span>}
+        {required && <span className="text-accent-error ml-1">*</span>}
       </label>
       {renderInput()}
     </div>

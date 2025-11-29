@@ -1,20 +1,46 @@
 ![MIT licensed][mit-badge]
 ![Apache licensed][apache-badge]
-[![Build Status][actions-badge]][actions-url]
 
 [mit-badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [apache-badge]: https://img.shields.io/github/license/saltstack/salt
-[actions-badge]: https://github.com/tlsnotary/tlsn-extension/actions/workflows/build.yaml/badge.svg
-[actions-url]: https://github.com/tlsnotary/tlsn-extension/actions?query=workflow%3Abuild+branch%3Amain++
 
 <img src="src/assets/img/icon-128.png" width="64"/>
 
-# Chrome Extension (MV3) for TLSNotary
+# LupoVerify Extension
 
-> [!IMPORTANT]
-> ⚠️ When running the extension against a [notary server](https://github.com/tlsnotary/tlsn/tree/main/crates/notary/server), please ensure that the server's version is the same as the version of this extension
+A fork of [TLSNotary Extension](https://github.com/tlsnotary/tlsn-extension) with custom dark glassmorphism UI theme, built for the LupoVerify ZK Twitter Quest System.
+
+## Screenshots
+
+| Verification In Progress | Verification Completed |
+|--------------------------|------------------------|
+| ![Verification In Progress](docs/images/Screenshot1.png) | ![Verification Completed](docs/images/Screenshot2.png) |
+
+## Related Repositories
+
+- **[LupoVerify Quest System](https://github.com/LucianoLupo/zk-twitter-verifier-002)** - Full-stack ZK Twitter verification with React frontend, NestJS backend, and Rust verifier
+
+## Changes from Upstream TLSNotary
+
+### UI/UX
+- **Dark glassmorphism theme** across all extension pages
+- Custom Tailwind utilities for glass surfaces, borders, and blur effects
+- Rebranded from TLSNotary to LupoVerify
+- Updated popup, side panel, history, options, and approval pages
+
+### Bug Fixes
+- **Fixed Chrome MV3 async message handling** - Resolved issue where `browser.runtime.sendMessage` would return early before proof completion
+- Uses explicit `sendResponse` callback pattern instead of Promise returns for long-running operations
+
+## Features
+
+- **MPC-TLS Notarization**: Generate cryptographic proofs of web content
+- **WASM Plugin System**: Execute custom plugins for data extraction
+- **Side Panel Progress**: Real-time notarization progress display
+- **Dark Glass UI**: Modern, elegant glassmorphism design
 
 ## License
+
 This repository is licensed under either of
 
 - [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
@@ -22,50 +48,106 @@ This repository is licensed under either of
 
 at your option.
 
-
 ## Installing and Running
 
-The easiest way to install the TLSN browser extension is to use the [Chrome Web Store](https://chromewebstore.google.com/detail/tlsn-extension/gcfkkledipjbgdbimfpijgbkhajiaaph).
+### From Source
 
-You can also build and run it locally as explained in the following steps.
+1. Check if your [Node.js](https://nodejs.org/) version is >= **18**
+2. Clone this repository:
+   ```bash
+   git clone https://github.com/LucianoLupo/lupo-verify-extension.git
+   cd lupo-verify-extension
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Build the extension:
+   ```bash
+   npm run build
+   ```
+5. Load in Chrome:
+   1. Go to `chrome://extensions/`
+   2. Enable `Developer mode`
+   3. Click `Load unpacked`
+   4. Select the `build` folder
 
-### Procedure:
+## Development
 
-1. Check if your [Node.js](https://nodejs.org/) version is >= **18**.
-2. Clone this repository.
-3. Run `npm install` to install the dependencies.
-4. Run `npm run dev`
-5. Load your extension on Chrome following:
-   1. Access `chrome://extensions/`
-   2. Check `Developer mode`
-   3. Click on `Load unpacked extension`
-   4. Select the `build` folder.
-6. Happy hacking.
+```bash
+# Development build with watch mode
+npm run dev
 
-## Building Websockify Docker Image
-```
-$ git clone https://github.com/novnc/websockify && cd websockify
-$ ./docker/build.sh
-$ docker run -it --rm -p 55688:80 novnc/websockify 80 api.x.com:443
-```
-
-## Running Websockify Docker Image
-```
-$ cd tlsn-extension
-$ docker run -it --rm -p 55688:80 novnc/websockify 80 api.twitter.com:443
-```
-
-## Packing
-
-After the development of your extension run the command
-
-```
-$ NODE_ENV=production npm run build
+# Production build
+NODE_ENV=production npm run build
 ```
 
-Now, the content of `build` folder will be the extension ready to be submitted to the Chrome Web Store. Just take a look at the [official guide](https://developer.chrome.com/webstore/publish) to more infos about publishing.
+The built extension will be in `build/` and a zip file in `zip/`.
 
-## Resources:
+## Running with Local Notary
 
-- [Webpack documentation](https://webpack.js.org/concepts/)
-- [Chrome Extension documentation](https://developer.chrome.com/extensions/getstarted)
+### 1. Start Notary Server
+
+```bash
+# Clone and build TLSNotary
+git clone https://github.com/tlsnotary/tlsn.git
+cd tlsn
+cargo build --release -p notary-server
+
+# Create config directory
+mkdir -p ~/.notary-server/config
+
+# Run notary server
+./target/release/notary-server --config ~/.notary-server/config/config.yaml
+```
+
+### 2. Start WebSocket Proxy
+
+```bash
+# Install wstcp
+cargo install wstcp
+
+# Run proxy for Twitter API
+wstcp --bind-addr 127.0.0.1:55688 api.x.com:443
+```
+
+### 3. Configure Extension
+
+In the extension options page, set:
+- **Notary API**: `http://localhost:7047`
+- **Proxy API**: `ws://localhost:55688`
+
+## Tech Stack
+
+| Component | Technology |
+|-----------|------------|
+| Framework | React 18 |
+| Styling | Tailwind CSS + Custom Glass Theme |
+| Build | Webpack 5 |
+| Extension | Chrome Manifest V3 |
+| Crypto | TLSNotary MPC-TLS |
+
+## Project Structure
+
+```
+lupo-verify-extension/
+├── src/
+│   ├── assets/          # Icons and images
+│   ├── components/      # Shared React components
+│   ├── entries/         # Extension entry points
+│   │   ├── Background/  # Service worker
+│   │   ├── Content/     # Content script
+│   │   ├── Popup/       # Toolbar popup
+│   │   ├── SidePanel/   # Side panel UI
+│   │   └── Options/     # Options page
+│   ├── pages/           # Page components
+│   └── utils/           # Utilities
+├── build/               # Built extension (git ignored)
+└── zip/                 # Packaged extension
+```
+
+## Resources
+
+- [TLSNotary Documentation](https://docs.tlsnotary.org/)
+- [TLSNotary GitHub](https://github.com/tlsnotary/tlsn)
+- [Chrome Extension Documentation](https://developer.chrome.com/docs/extensions/)

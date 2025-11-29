@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "TLSN Extension",
-  "description": "A chrome extension for TLSN",
+  "name": "LupoVerify",
+  "description": "Zero-knowledge Twitter verification powered by TLSNotary",
   "options_page": "options.html",
   "background": {
     "service_worker": "background.bundle.js"
@@ -38,6 +38,7 @@
     "storage",
     "webRequest",
     "activeTab",
-    "sidePanel"
+    "sidePanel",
+    "cookies"
   ]
 }

@@ -1,10 +1,11 @@
 {
-  "name": "tlsn-extension",
-  "version": "0.1.0.1202",
+  "name": "lupo-verify-extension",
+  "version": "1.0.0",
   "license": "MIT",
+  "description": "LupoVerify - ZK Twitter Verification Extension",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tlsnotary/tlsn-extension.git"
+    "url": "https://github.com/lucianolupo/lupo-verify-extension.git"
   },
   "scripts": {
     "clone:tlsn": "bash ./utils/download-tlsn.sh",

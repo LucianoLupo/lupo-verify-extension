@@ -51,8 +51,8 @@ const ConnectionDetailsModal = (props: {
       <ModalContent className="w-full gap-2 flex-grow flex flex-col items-center justify-between px-4 pt-0 pb-4">
         <div className="flex flex-row gap-2 items-start w-full text-xs font-semibold text-slate-800">
           {connected
-            ? 'TLSN Extension is connected to this site.'
-            : 'TLSN Extension is not connected to this site. To connect to this site, find and click the connect button.'}
+            ? 'LupoVerify is connected to this site.'
+            : 'LupoVerify is not connected to this site. To connect to this site, find and click the connect button.'}
         </div>
         {connected && (
           <button

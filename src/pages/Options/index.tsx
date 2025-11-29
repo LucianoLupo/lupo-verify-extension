@@ -207,16 +207,12 @@ export default function Options(): ReactElement {
         <button
           className="button"
           onClick={() =>
-            openInTab('https://github.com/tlsnotary/tlsn-extension/issues/new')
+            openInTab(
+              'https://github.com/lucianolupo/lupo-verify-extension/issues/new',
+            )
           }
         >
           File an issue
-        </button>
-        <button
-          className="button"
-          onClick={() => openInTab('https://discord.gg/9XwESXtcN7')}
-        >
-          Join our Discord
         </button>
         <button className="button" onClick={onCleanCache}>
           <span>Clean Cache (</span>

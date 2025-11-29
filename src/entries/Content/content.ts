@@ -3,7 +3,7 @@ import { PresentationJSON } from 'tlsn-js/build/types';
 
 const client = new RPCClient();
 
-class TLSN {
+class LupoVerify {
   async notarize(
     url: string,
     requestOptions?: {
@@ -47,12 +47,18 @@ class TLSN {
 }
 
 const connect = async () => {
-  return new TLSN();
+  return new LupoVerify();
 };
 
 // @ts-ignore
-window.tlsn = {
+window.lupoVerify = {
   connect,
 };
 
+// Also expose as window.tlsn for backwards compatibility
+// @ts-ignore
+window.tlsn = window.lupoVerify;
+
+window.dispatchEvent(new CustomEvent('lupoVerify_loaded'));
+// Also dispatch tlsn_loaded for backwards compatibility
 window.dispatchEvent(new CustomEvent('tlsn_loaded'));
